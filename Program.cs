@@ -1,9 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+Ôªøusing Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Cp2WebApplication.Infrastructure.Context;
 using Cp2WebApplication.Domain.Entities;
 using Cp2WebApplication.Infrastructure.Repositories;
 using Cp2WebApplication.Infrastructure.Mappings;
+using System.Reflection;
 
 
 namespace Cp2WebApplication
@@ -24,13 +25,21 @@ namespace Cp2WebApplication
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = builder.Configuration["Swagger:Title"] ?? "Cp2 API",
-                    Description = (builder.Configuration["Swagger:Description"] ?? "API para gerenciamento de motos no p·tio - ") + DateTime.Now.Year,
-                    Contact = new OpenApiContact()
-                    {
-                        Email = "profthiago.vicco@fiap.com.br",
-                        Name = "Thiago Keller"
-                    }
+                    Version = "v1",
+                    Description =
+                    "API para gerenciamento de motos no p√°tio - " + DateTime.Now.Year + "<br/><br/>" +
+                    "Integrantes:<br/>" +
+                    "- Eduardo Barriviera (RM555309) - https://github.com/edu1805<br/>" +
+                    "- Thiago Freitas (RM556795) - https://github.com/thiglfa"
                 });
+
+                // Caminho do XML gerado para doc
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                swagger.IncludeXmlComments(xmlPath);
+
+                // Permite usar [SwaggerOperation], [SwaggerResponse], etc.
+                swagger.EnableAnnotations();
             });
 
             // Banco de dados Oracle
@@ -42,12 +51,15 @@ namespace Cp2WebApplication
             // AutoMapper
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-            // Exemplo de injeÁ„o de repositÛrio (se estiver usando)
+            // inje√ß√£o de reposit√≥rio
             builder.Services.AddScoped<IRepository<Moto>, Repository<Moto>>();
+            builder.Services.AddScoped<IRepository<Moto>, Repository<Moto>>();
+            builder.Services.AddScoped<ILocalizacaoAtualRepository, LocalizacaoAtualRepository>();
+
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

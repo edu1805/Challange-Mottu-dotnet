@@ -3,6 +3,7 @@ using System;
 using Cp2WebApplication.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace Cp2WebApplication.Migrations
 {
     [DbContext(typeof(Cp2Context))]
-    partial class Cp2ContextModelSnapshot : ModelSnapshot
+    [Migration("20250518020855_AddLocalizacaoAtual")]
+    partial class AddLocalizacaoAtual
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

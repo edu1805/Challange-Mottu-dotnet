@@ -4,14 +4,14 @@ using Cp2WebApplication.Infrastructure.DTOs;
 
 namespace Cp2WebApplication.Infrastructure.Mappings
 {
-    public class AutoMapperProfile : Profile
+    public class LocalizacaoAtualProfile : Profile
     {
-        public AutoMapperProfile()
+        public LocalizacaoAtualProfile()
         {
-            CreateMap<Moto, MotoDto>().ReverseMap();
-
-            CreateMap<LocalizacaoAtual, LocalizacaoAtualDto>().ReverseMap();
+            CreateMap<LocalizacaoAtual, LocalizacaoAtualDto>();
             CreateMap<CriarLocalizacaoAtualDto, LocalizacaoAtual>();
+            CreateMap<AtualizarLocalizacaoAtualDto, LocalizacaoAtual>();
         }
     }
+
 }
