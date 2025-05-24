@@ -57,6 +57,7 @@ namespace Cp2WebApplication
             builder.Services.AddScoped<IRepository<Moto>, Repository<Moto>>();
             builder.Services.AddScoped<ILocalizacaoAtualRepository, LocalizacaoAtualRepository>();
 
+            builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
             var app = builder.Build();
 
@@ -67,7 +68,8 @@ namespace Cp2WebApplication
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
 
             app.UseAuthorization();
 
