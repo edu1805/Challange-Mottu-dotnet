@@ -24,6 +24,7 @@ namespace Cp2WebApplication.Controllers
         [HttpGet("all")]
         [SwaggerOperation(Summary = "Lista todas as localizações registradas das motos.")]
         [SwaggerResponse(200, "Retorna a lista de localizações.", typeof(IEnumerable<LocalizacaoAtualDto>))]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult<IEnumerable<LocalizacaoAtualDto>>> ListarTodas()
         {
             var localizacoes = await _repository.ListarTodasAsync();
@@ -35,6 +36,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Obtém a localização atual de uma moto pelo ID.")]
         [SwaggerResponse(200, "Retorna a localização da moto.", typeof(LocalizacaoAtualDto))]
         [SwaggerResponse(404, "Localização para a moto não encontrada.")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult<LocalizacaoAtualDto>> ObterPorMotoId(int motoId)
         {
             var localizacao = await _repository.ObterPorMotoIdAsync(motoId);
@@ -49,6 +51,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Cria uma nova localização atual para uma moto.")]
         [SwaggerResponse(201, "Localização criada com sucesso.", typeof(LocalizacaoAtualDto))]
         [SwaggerResponse(400, "Dados inválidos para criação.")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult> Criar([FromBody] CriarLocalizacaoAtualDto dto)
         {
             if (!ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Atualiza a localização de uma moto existente.")]
         [SwaggerResponse(204, "Atualização concluída com sucesso.")]
         [SwaggerResponse(404, "Localização da moto não encontrada.")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult> Atualizar(int motoId, [FromBody] AtualizarLocalizacaoAtualDto dto)
         {
             var localizacao = await _repository.ObterPorMotoIdAsync(motoId);
@@ -81,6 +85,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Deleta o registro de localização de uma moto.")]
         [SwaggerResponse(204, "Localização deletada com sucesso.")]
         [SwaggerResponse(404, "Localização da moto não encontrada.")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult> Deletar(int motoId)
         {
             var localizacao = await _repository.ObterPorMotoIdAsync(motoId);

@@ -10,6 +10,7 @@ namespace Cp2WebApplication.Controllers
 {
     [ApiController]
     [Route("api/motos")]
+    [SwaggerTag("Controller responsável por gerenciar motos.")]
     public class MotoController : ControllerBase
     {
         private readonly Cp2Context _context;
@@ -29,6 +30,7 @@ namespace Cp2WebApplication.Controllers
         [HttpGet]
         [SwaggerOperation(Summary = "Listar motos", Description = "Retorna todas as motos ou apenas as que têm o status informado.")]
         [SwaggerResponse(200, "Lista de motos retornada com sucesso", typeof(IEnumerable<MotoDto>))]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult<IEnumerable<MotoDto>>> GetAll([FromQuery] string? status = null)
         {
             var query = _context.Motos.AsQueryable();
@@ -47,6 +49,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Buscar moto por ID", Description = "Retorna uma moto específica pelo ID.")]
         [SwaggerResponse(200, "Moto encontrada", typeof(MotoDto))]
         [SwaggerResponse(404, "Moto não encontrada")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult<MotoDto>> GetById(int id)
         {
             var moto = await _context.Motos.FindAsync(id);
@@ -62,6 +65,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Criar moto", Description = "Cria uma nova moto com os dados informados.")]
         [SwaggerResponse(201, "Moto criada com sucesso", typeof(MotoDto))]
         [SwaggerResponse(400, "Dados inválidos")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult<MotoDto>> Create([FromBody] CreateMotoDto dto)
         {
             try
@@ -88,6 +92,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerResponse(204, "Moto atualizada com sucesso")]
         [SwaggerResponse(400, "Erro nos dados enviados")]
         [SwaggerResponse(404, "Moto não encontrada")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult> Update(int id, [FromBody] UpdateMotoDto dto)
         {
             var moto = await _context.Motos.FindAsync(id);
@@ -116,6 +121,7 @@ namespace Cp2WebApplication.Controllers
         [SwaggerOperation(Summary = "Deletar moto", Description = "Remove uma moto do sistema.")]
         [SwaggerResponse(204, "Moto deletada com sucesso")]
         [SwaggerResponse(404, "Moto não encontrada")]
+        [SwaggerResponse(500, "Erro interno no servidor")]
         public async Task<ActionResult> Delete(int id)
         {
             var moto = await _context.Motos.FindAsync(id);

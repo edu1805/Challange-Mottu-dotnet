@@ -24,13 +24,14 @@ namespace Cp2WebApplication
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = builder.Configuration["Swagger:Title"] ?? "Cp2 API",
+                    Title = builder.Configuration["Swagger:Title"] ?? "MotoMap - API",
                     Version = "v1",
                     Description =
-                    "API para gerenciamento de motos no pátio - " + DateTime.Now.Year + "<br/><br/>" +
+                    "API para gerenciamento de motos no pátio da mottu - " + DateTime.Now.Year + "<br/><br/>" +
                     "Integrantes:<br/>" +
                     "- Eduardo Barriviera (RM555309) - https://github.com/edu1805<br/>" +
-                    "- Thiago Freitas (RM556795) - https://github.com/thiglfa"
+                    "- Thiago Freitas (RM556795) - https://github.com/thiglfa<br/>" +
+                    "- Bruno Centurion Fernandes (RM556531) - https://github.com/brunocenturion"
                 });
 
                 // Caminho do XML gerado para doc
