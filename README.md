@@ -42,8 +42,8 @@ Este projeto foi desenvolvido como parte do desafio da faculdade, com o objetivo
 ### 📦 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/Cp2WebApplication.git
-cd Cp2WebApplication
+git clone https://github.com/edu1805/Challange-Mottu-dotnet.git
+cd Challange-Mottu-dotnet
 ```
 
 ---
